@@ -32,7 +32,7 @@ class Heimdall {
       } catch (error) {
         log.error(`[HEIMDALL]: ${error}`);
       }
-    }, 1000);
+    }, 2000);
   }
 
   async configuratePendingBroadcastMessage(): Promise<BroadcastMessage> {
