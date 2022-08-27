@@ -12,16 +12,18 @@ class Logger {
     this.logger.warn(message);
   }
 
-  help(message: string) {
-    this.logger.help(message);
-  }
-
-  data(message: string) {
-    this.logger.data(message);
-  }
-
   info(message: string) {
+    if (!process.env.DEBUG) {
+      return;
+    }
     this.logger.info(message);
+  }
+
+  http(message: string) {
+    if (!process.env.DEBUG) {
+      return;
+    }
+    this.logger.http(message);
   }
 
   debug(message: string) {
@@ -29,26 +31,6 @@ class Logger {
       return;
     }
     this.logger.debug(message);
-  }
-
-  prompt(message: string) {
-    this.logger.prompt(message);
-  }
-
-  http(message: string) {
-    this.logger.http(message);
-  }
-
-  verbose(message: string) {
-    this.logger.verbose(message);
-  }
-
-  input(message: string) {
-    this.logger.input(message);
-  }
-
-  silly(message: string) {
-    this.logger.silly(message);
   }
 
   constructor() {
