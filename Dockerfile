@@ -39,6 +39,5 @@ RUN npm run build
 
 # Switch user
 USER www:www
-RUN 
 EXPOSE 8080
 CMD [ "npm", "start" ]
