@@ -2,6 +2,8 @@ import * as synchronized from "synchronized-promise";
 import * as fs from "fs";
 import * as types from "./types";
 
+import { dirname } from "path";
+
 import fetch from "node-fetch";
 import tonlib from "node-tonlib";
 
@@ -16,7 +18,13 @@ class Tonclient {
     })();
 
     const network = "mainnet";
-    const keystorePath = `${__dirname}/keystore`;
+
+    if (require.main === undefined) {
+      throw new Error("Can't locate project root path");
+    }
+
+    const rootPath = dirname(require.main.filename);
+    const keystorePath = `${rootPath}/keystore`;
 
     if (!fs.existsSync(keystorePath)) {
       fs.mkdirSync(keystorePath);

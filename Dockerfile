@@ -21,11 +21,13 @@ RUN export DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true \
 
 # Create and activate `www` user
 RUN useradd --user-group --create-home --system --skel /dev/null --home-dir /www www
-# RUN chown -R www /www
-# USER www:www
 
 # Switch workdir
 WORKDIR /heimdall
+
+# Cerate keystore directory
+RUN mkdir -p /heimdall/build/keystore
+RUN chown -R www:www /heimdall/build/keystore
 
 COPY .npmrc .
 COPY package.json .
@@ -37,5 +39,6 @@ RUN npm run build
 
 # Switch user
 USER www:www
+RUN 
 EXPOSE 8080
 CMD [ "npm", "start" ]
